@@ -26,11 +26,23 @@
         
         echo "得到檔案".$file."<br>";
         echo "準備進行資料處理作業..........<br>";
-        $resource = fopen($file,'a+');
+
+        $dsn = "mysql:host=localhost;charset=utf8;dbname=file_upload";
+        $pdo = new PDO($dsn,'root','');
+
+        
+        
+        $resource = fopen($file,'r+');
+        $first = 0;
         while(!feof($resource)){
-            echo fgets($resource)."<br>";
+            $str = explode(",",fgets($resource));
+            if(is_numeric($str[0]) && count($str)==4){
+                $sql ="INSERT INTO `users` (`name`,`gender`,`status`) VALUES ('{$str[1]}','{$str[2]}','{$str[3]}')";
+                $pdo->exec($sql);
+                $first++;
+            }
         }
-        // fwrite($resource, 'str');
         fclose($resource);
+        echo ($first >0)?"共寫入".($first-1)."筆資料":"";
     }
 ?>
