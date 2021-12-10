@@ -29,4 +29,17 @@
         }
     }
     echo $str;
+    $dstimg =imagecreatetruecolor(200,50);
+    $white =  imagecolorallocate($dstimg, 255, 255, 255);
+    $black =  imagecolorallocate($dstimg, 0, 0, 0);
+    imagefill($dstimg, 0 ,0,$white);
+    for($i=0;$i<$len;$i++){
+        $c =$str[$i];
+         imagestring($dstimg,5,($i*rand(18,20)+10),(10+rand(0,10)),$c,$black);
+    }
+
+
+
+    imagejpeg($dstimg,'captcha.png');
 ?>
+<img src="./captcha.png" alt="">

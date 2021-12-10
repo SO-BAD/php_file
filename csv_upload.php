@@ -21,7 +21,7 @@
             saveToDB("file/".$newFileName);
         }
     }
-
+    //$bom =  chr(239).chr(187).chr(191).
     function saveToDB($file){
         
         echo "得到檔案".$file."<br>";

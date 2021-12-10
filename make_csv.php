@@ -16,6 +16,9 @@ if(isset($_GET['do'])){
 }
 
 echo "<ul>";
+//寫入BOM 頭
+// fwrite($file,'\xEF\xBB\xBF');
+
 foreach($res as $key =>$data){
     echo "<li>";
     echo $data['num'].",".$data['name'].",".$data['gender'].",".$data['status'];
